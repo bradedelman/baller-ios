@@ -1,4 +1,4 @@
-# Baller for iOS (Alpha 0.1)
+# Baller for iOS (Alpha 0.0.2)
 
 Baller is a cross-platform View Framework.  It's not an Application framework, it's just a way to implement a view e.g. a "User Interface Screen".  
 
@@ -37,7 +37,7 @@ It's really easy to get up and running with Baller in any Swift Application.  Le
 2. Add the Baller Swift Package to your App
 	- File -> Swift Packages -> Add Package Dependency
 	- Use this Package https://github.com/bradedelman/baller-ios
-	- for Rules, switch to Branch: main
+	- for Rules, Version -> Exact -> 0.0.2
 	- Press Next (download occurs)
 	- Pres Finish
 	- Baller is now in your porject in a seciton called Swift Package Dependencies
