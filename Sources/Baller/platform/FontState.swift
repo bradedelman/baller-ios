@@ -28,7 +28,7 @@ class FontState
     
     func fontSize(_ size: CGFloat)
     {
-        _fontSize = size;
+        _fontSize = 1.06 * size; // TODO: revisit schluff factor
     }
     
     func getFont() -> UIFont?
