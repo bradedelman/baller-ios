@@ -26,11 +26,11 @@ open class NativeList : NativeDiv, UICollectionViewDataSource, UICollectionViewD
             super.init(frame: frame)
         }
 
-        func create(native:Native, viewTypeId:String, w: Int, h: Int)
+        func create(native:Native, viewTypeId:String, w: Int, h: Int, parentId:String)
         {
             if (!bCreated) {
                 bCreated = true;
-                nv =  native.jsCreate(jsTypeId: viewTypeId)!;
+                nv =  native.jsCreate(jsTypeId: viewTypeId, parentId: parentId)!;
                 let _ = nv?.jsCall("doLayout", NSNumber(value:w), NSNumber(value:h));
                 nv?.setBounds(NSNumber(value:0), NSNumber(value:0), NSNumber(value:w), NSNumber(value:h));
                 addSubview(nv!._e!);
@@ -50,7 +50,7 @@ open class NativeList : NativeDiv, UICollectionViewDataSource, UICollectionViewD
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: _viewTypeId, for: indexPath as IndexPath) as! MyCollectionViewCell
-        cell.create(native:_native!, viewTypeId:_viewTypeId, w:_viewWidth, h:_viewHeight);
+        cell.create(native:_native!, viewTypeId:_viewTypeId, w:_viewWidth, h:_viewHeight, parentId: _id);
 
         let i:NSInteger = indexPath.row;
         let _:Any? = cell.nv?.jsCall("onPopulate", i, _id);

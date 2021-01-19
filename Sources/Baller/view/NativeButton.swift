@@ -11,10 +11,14 @@ import UIKit
 
 open class NativeButton : NativeView {
 
+    var _font: FontState?;
+    
     override func create() -> UIView
     {
         let v = UIButton(type: .system)
      
+        _font = FontState(native: _native!);
+        
         v.setTitleColor(.black, for: .normal)
         v.layer.borderColor = UIColor.black.cgColor;
         v.layer.borderWidth = 1
@@ -39,11 +43,22 @@ open class NativeButton : NativeView {
     }
 
     // methods that are callable from JavaScript must be declared with @objc and take NSObject style parameters
-    @objc func font(_ url: NSString, _ size: NSNumber) {
+    @objc func fontFace(_ url: NSString, _ bSystem: NSNumber) {
+        _font!.fontFace(url as String, bSystem.boolValue);
+        fontCore();
+    }
 
+    // methods that are callable from JavaScript must be declared with @objc and take NSObject style parameters
+    @objc func fontSize(_ size: NSNumber) {
+        _font!.fontSize(CGFloat(size.floatValue));
+        fontCore();
+    }
+
+    func fontCore()
+    {
         if (_e != nil) {
             let v = _e as! UIButton;
-            v.titleLabel?.font = UIFont(name: _native!._fonts.getFont(url: url as String), size: 1.06 * CGFloat(size.floatValue)); // TODO: revisit "schluff factor"
+            v.titleLabel?.font = _font!.getFont();
         }
     }
     

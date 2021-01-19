@@ -57,9 +57,9 @@ import UIKit
         _services[name] = service;
     }
     
-    func jsCreate(jsTypeId: String) -> NativeView?
+    func jsCreate(jsTypeId: String, parentId: String) -> NativeView?
     {
-        let s: String = "Baller.create('" + _nativeId + "', '" + jsTypeId + "')";
+        let s: String = "Baller.create('" + _nativeId + "', '" + jsTypeId + "', '" + parentId + "')";
         let viewId = _js.evaluateScript(s);
         return _views[viewId!.toString()];
     }

@@ -56,7 +56,7 @@ class NativeHost : NativeService {
     {
         let nativeType = String(nativeTypeNS);
 
-        let nv = _native!.jsCreate(jsTypeId:nativeType);
+        let nv = _native!.jsCreate(jsTypeId:nativeType, parentId: "");
         let view = nv?._e;
         _hostView?.addSubview(view!);
         _hostView?._content = nv;
