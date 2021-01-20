@@ -1,4 +1,4 @@
-# Baller for iOS (Alpha 0.0.2)
+# Baller for iOS (Alpha 0.0.3)
 
 Baller is a cross-platform View Framework.  It's not an Application framework, it's just a way to implement a view e.g. a "User Interface Screen".  
 
@@ -37,7 +37,7 @@ It's really easy to get up and running with Baller in any Swift Application.  Le
 2. Add the Baller Swift Package to your App
 	- File -> Swift Packages -> Add Package Dependency
 	- Use this Package https://github.com/bradedelman/baller-ios
-	- for Rules, Version -> Exact -> 0.0.2
+	- for Rules, Version -> Exact -> 0.0.3
 	- Press Next (download occurs)
 	- Pres Finish
 	- Baller is now in your porject in a seciton called Swift Package Dependencies
@@ -58,20 +58,9 @@ It's really easy to get up and running with Baller in any Swift Application.  Le
         ballerView.frame = r
         view.addSubview(ballerView)
         
-        // don't do synchronous network requests... this is just to make
-        // the example simple, and to make it clear that scripts can come from
-        // anywhere e.g. the Web, a cache, the app bundle, etc.
-        if let url = URL(string: "https://www.cleverfocus.com/baller/sample.js") {
-            do {
-                let contents = try String(contentsOf: url)
-                
-                // load the script into the Baller View
-                ballerView.load(scriptContent: contents)
-            } catch {
-                // contents could not be loaded
-            }
-        }
-
+        // load script (loadUrl is a convienence, but load can be used
+        // for a script that comes from anywhere)
+        ballerView.loadUrl(urlString: "https://www.cleverfocus.com/baller/sample.js")
 ```
 
 ### That's it!  Run and you'll see the sample view with a scrolling list of 1,000 numbers!   More coming soon on how to create your own views.
