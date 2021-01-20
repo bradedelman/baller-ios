@@ -75,6 +75,31 @@ open class BallerView : UIView
         _native._js.evaluateScript("Baller.init('" + script + "', '" + _native._nativeId + "')");
     }
     
+    public func loadUrl(urlString: String)
+    {
+        let configuration = URLSessionConfiguration.default
+        configuration.timeoutIntervalForRequest = 30
+        configuration.timeoutIntervalForResource = 30
+        let session = URLSession(configuration: configuration)
+        
+        let url = URL(string: urlString)!
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET";
+                
+        let task = session.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
+            // important to process result on main UI thread
+            DispatchQueue.main.async {
+                if (data != nil) {
+                    let script = String(decoding: data!, as: UTF8.self)
+                    self.load(scriptContent: script);
+                }
+            }
+        })
+        
+        task.resume()
+    }
+
     public override func layoutSubviews() {
         super.layoutSubviews();
         
